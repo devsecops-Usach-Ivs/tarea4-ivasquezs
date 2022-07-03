@@ -19,7 +19,7 @@ pipeline {
       }
       stage('SAST') {
          steps {
-            withCredentials([string(credentialsId: 'sonarcloud', variable: 'SONARTOKEN')]) {
+            withCredentials([string(credentialsId: 'SONARTOKEN', variable: 'SONARTOKEN')]) {
                  figlet 'SAST'
                  sh('set +x; ./gradlew sonarqube -Dsonar.login=$SONARTOKEN -Dsonar.branch.name=feature-jenkins-ivs')
             }
