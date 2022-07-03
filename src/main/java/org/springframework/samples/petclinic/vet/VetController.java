@@ -58,6 +58,12 @@ class VetController {
 		model.addAttribute("totalPages", paginated.getTotalPages());
 		model.addAttribute("totalItems", paginated.getTotalElements());
 		model.addAttribute("listVets", listVets);
+
+
+		/** nueva vulnerabilidad añadida */
+		String password = "EstaEsLaPassword-ParaForzarElAnálisisDeSonarCloud";
+
+
 		return "vets/vetList";
 	}
 
