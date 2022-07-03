@@ -17,6 +17,13 @@ pipeline {
           //archiveArtifacts artifacts: "build/libs/testing-web-*.jar"
          }
       }
+      stage('SAST') {
+         steps {
+            withCredentials([string(credentialsId: 'sonarcloud', variable: 'SONARTOKEN')]) {
+                 figlet 'SAST'
+                 sh('set +x; ./gradlew sonarqube -Dsonar.login=$SONARTOKEN -Dsonar.branch.name=feature-jenkins-ivs')
+            }
+         }
+      }
    }
 }
-
