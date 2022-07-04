@@ -166,4 +166,28 @@ class OwnerController {
 		return mav;
 	}
 
+	/**
+	 * Nuevas vulnerabilidades
+	 */
+	@PostMapping("/owners/testvlb1")
+	public String pruebaAddVulnerabilidad1(@Valid Owner owner) {
+		this.owners.findById(owner.getId());
+		return "redirect:/owners/{ownerId}";
+
+	}
+
+	@PostMapping("/owners/testvlb2")
+	public String pruebaAddVulnerabilidad2(@Valid Owner owner) {
+		this.owners.findById(owner.getId());
+		return "redirect:/owners/{ownerId}";
+
+	}
+
+	@PostMapping("/owners/testvlb3")
+	public String pruebaAddVulnerabilidad3(@Valid Owner owner) {
+		this.owners.findById(owner.getId());
+		return "redirect:/owners/{ownerId}";
+
+	}
+
 }
