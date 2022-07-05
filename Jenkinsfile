@@ -32,6 +32,7 @@ pipeline {
                   -f "ALL" 
                   --prettyPrint''', odcInstallation: 'OWASP-Dependency-Check'
                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+               sh 'mv dependency-check-report.xml /var/lib/jenkins/workspace/reports/${env.JOB_NAME}/' 
          }
       } 
    }
