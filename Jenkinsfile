@@ -25,6 +25,7 @@ pipeline {
       }
       stage('SCA') {
          steps {
+               figlet 'SCA OWASP-DC'
                dependencyCheck additionalArguments: ''' 
                   -o "./" 
                   -s "./"
