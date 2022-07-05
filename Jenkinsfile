@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    environment {
+       NOMBRE_REPORTE_SCA = 'dependency-check-report.xml'
+       PATH_REPORTES = '/tmp/jenkins/reports/'
+    }
     stages {  
       stage('SCM') {
          steps {
@@ -31,8 +35,9 @@ pipeline {
                   -s "./"
                   -f "ALL" 
                   --prettyPrint''', odcInstallation: 'OWASP-Dependency-Check'
-               dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-               sh 'mv dependency-check-report.xml /tmp/jenkins/reports/$JOB_NAME-$BUILD_ID-' 
+               dependencyCheckPublisher pattern: '$NOMBRE_REPORTE_SCA'
+               sh 'mv $NOMBRE_REPORTE_SCA $PATH_REPORTES$JOB_NAME-$BUILD_ID-$NOMBRE_REPORTE_SCA'
+               sh 'set chmod 777 $PATH_REPORTES$JOB_NAME-$BUILD_ID-$NOMBRE_REPORTE_SCA'
          }
       } 
    }
