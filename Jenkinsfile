@@ -14,7 +14,6 @@ pipeline {
             figlet 'BUILD'
             sh 'set +x; chmod 777 gradlew'
             sh './gradlew clean build'
-          //archiveArtifacts artifacts: "build/libs/testing-web-*.jar"
          }
       }
       stage('SAST') {
@@ -25,5 +24,15 @@ pipeline {
             }
          }
       }
+      stage('SCA') {
+         steps {
+               dependencyCheck additionalArguments: ''' 
+                  -o "./" 
+                  -s "./"
+                  -f "ALL" 
+                  --prettyPrint''', odcInstallation: 'OWASP-Dependency-Check'
+               dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+         }
+      } 
    }
 }
