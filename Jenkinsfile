@@ -1,6 +1,5 @@
 pipeline {
-    agent any 
-
+    agent any
     stages {  
       stage('SCM') {
          steps {
@@ -32,7 +31,7 @@ pipeline {
                   -f "ALL" 
                   --prettyPrint''', odcInstallation: 'OWASP-Dependency-Check'
                dependencyCheckPublisher pattern: 'dependency-check-report.xml'
-               sh 'mv dependency-check-report.xml /var/lib/jenkins/workspace/reports/${env.JOB_NAME}/' 
+               sh 'mv dependency-check-report.xml /tmp/jenkins/reports/$JOB_NAME-$BUILD_ID-' 
          }
       } 
    }
